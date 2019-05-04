@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.mihail.luhov.flappy.bird.FlappyBird;
 import com.mihail.luhov.flappy.bird.sprites.Bird;
@@ -12,16 +14,21 @@ import com.mihail.luhov.flappy.bird.sprites.Tube;
 public class PlayState extends State {
     private static final int TUBE_SPACING = 125;
     private static final int TUBE_COUNT = 4;
+    private static final int GROUND_OFFSET = -80;
 
     private Bird bird;
     private Texture background;
     private Array<Tube> tubes;
+    private Texture ground;
+    private Vector2 groundPos1, groundPos2;
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
         bird = new Bird(50, 300);
         background = new Texture("background.png");
-
+        ground = new Texture("ground.png");
+        groundPos1 = new Vector2(camera.position.x  - camera.viewportWidth / 2, GROUND_OFFSET);
+        groundPos2 = new Vector2(groundPos1.x + ground.getWidth(), GROUND_OFFSET);
         tubes = new Array<Tube>();
         for (int i = 0; i < TUBE_COUNT; ++i)
             tubes.add(new Tube(i * (TUBE_SPACING + Tube.TUBE_WIDTH)));
@@ -39,12 +46,15 @@ public class PlayState extends State {
     @Override
     public void update(float dt) {
         handleInput();
+        updateGround();
         bird.update(dt);
 
         camera.position.x = bird.getPosition().x + 80;
-        for (int i = 0; i < tubes.size; ++i)
+
+        if (bird.getPosition().y <= ground.getHeight() + GROUND_OFFSET)
+            gsm.set(new PlayState(gsm));
+        for (Tube tube : tubes)
         {
-            Tube tube = tubes.get(i);
             if (tube.getPosTopTube().x + tube.getTopTube().getWidth() <
                     camera.position.x - (camera.viewportWidth / 2))
             {
@@ -52,9 +62,13 @@ public class PlayState extends State {
                         (Tube.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT);
             }
 
-            if (tube.collide(bird.getBounds()) || bird.getPosition().y <= 0)
+            if (tube.collide(bird.getBounds()))
+            {
                 gsm.set(new PlayState(gsm));
+                break;
+            }
         }
+
         camera.update();
     }
 
@@ -71,7 +85,8 @@ public class PlayState extends State {
             spriteBatch.draw(tube.getBottomTube(), tube.getPosBottomTube().x,
                     tube.getPosBottomTube().y);
         }
-
+        spriteBatch.draw(ground, groundPos1.x, groundPos1.y);
+        spriteBatch.draw(ground, groundPos2.x, groundPos2.y);
         spriteBatch.end();
     }
 
@@ -82,5 +97,14 @@ public class PlayState extends State {
 
         for (Tube tube : tubes)
             tube.dispose();
+        ground.dispose();
+    }
+
+    public void updateGround()
+    {
+        if (camera.position.x - camera.viewportWidth / 2 > groundPos1.x + ground.getWidth())
+            groundPos1.add(ground.getWidth() * 2, 0);
+        if (camera.position.x - camera.viewportWidth / 2 > groundPos2.x + ground.getWidth())
+            groundPos2.add(ground.getWidth() * 2, 0);
     }
 }
