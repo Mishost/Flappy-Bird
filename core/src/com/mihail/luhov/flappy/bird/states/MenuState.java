@@ -19,7 +19,6 @@ public class MenuState extends State {
         if (Gdx.input.justTouched())
         {
             gsm.set(new PlayState(gsm));
-            dispose();
         }
     }
 

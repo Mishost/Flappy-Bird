@@ -42,8 +42,9 @@ public class PlayState extends State {
         bird.update(dt);
 
         camera.position.x = bird.getPosition().x + 80;
-        for (Tube tube : tubes)
+        for (int i = 0; i < tubes.size; ++i)
         {
+            Tube tube = tubes.get(i);
             if (tube.getPosTopTube().x + tube.getTopTube().getWidth() <
                     camera.position.x - (camera.viewportWidth / 2))
             {
@@ -76,6 +77,10 @@ public class PlayState extends State {
 
     @Override
     public void dispose() {
+        bird.dispose();
+        background.dispose();
 
+        for (Tube tube : tubes)
+            tube.dispose();
     }
 }
