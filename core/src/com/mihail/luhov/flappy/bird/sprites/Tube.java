@@ -1,6 +1,7 @@
 package com.mihail.luhov.flappy.bird.sprites;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.Random;
@@ -15,6 +16,7 @@ public class Tube {
     private Vector2 posTopTube, posBottomTube;
     private Random rand;
 
+    private Rectangle boundsTop, boundsBottom;
     public Tube(float x)
     {
         topTube = new Texture("toptube.png");
@@ -30,6 +32,10 @@ public class Tube {
         //the top of the tube to be at that spot, not the bottom left point of the image
         posTopTube = new Vector2(x, posBottomTube.y + TUBE_GAP + topTube.getHeight());
         //adding the height because here the bottom left is what we want to draw
+
+        boundsTop = new Rectangle(posTopTube.x, posTopTube.y, topTube.getWidth(), topTube.getHeight());
+        boundsBottom = new Rectangle(posBottomTube.x, posBottomTube.y,
+                bottomTube.getWidth(), bottomTube.getHeight());
     }
 
     public void reposition(float x)
@@ -37,6 +43,14 @@ public class Tube {
         posBottomTube.set(x, LOWEST_OPENING +
                 rand.nextInt(FLUCTUATION) - bottomTube.getHeight());
         posTopTube.set(x, posBottomTube.y + TUBE_GAP + topTube.getHeight());
+
+        boundsTop.setPosition(posTopTube);
+        boundsBottom.setPosition(posBottomTube);
+    }
+
+    public boolean collide(Rectangle player)
+    {
+        return player.overlaps(boundsTop) || player.overlaps(boundsBottom);
     }
 
     public Texture getTopTube() {
