@@ -11,6 +11,8 @@ public class MenuState extends State {
     public MenuState(GameStateManager gsm)
     {
         super(gsm);
+        camera.setToOrtho(false, FlappyBird.WIDTH / 2,
+                FlappyBird.HEIGHT / 2);
         background = new Texture("background.png");
         playButton = new Texture("playButton.png");
     }
