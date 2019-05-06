@@ -1,0 +1,31 @@
+#Internal package file, do not edit.
+#Mon May 06 00:17:24 EEST 2019
+2.base=C\:\\Code\\Flappy-Bird\\android\\build\\intermediates\\merged_assets\\debug\\mergeDebugAssets\\out
+5.set=ASSET
+0.path=badlogic.jpg
+2.baseType=DIRECTORY
+3.base=C\:\\Code\\Flappy-Bird\\android\\build\\intermediates\\merged_assets\\debug\\mergeDebugAssets\\out
+2.set=ASSET
+1.path=toptube.png
+4.base=C\:\\Code\\Flappy-Bird\\android\\build\\intermediates\\merged_assets\\debug\\mergeDebugAssets\\out
+count=7
+5.baseType=DIRECTORY
+2.path=background.png
+5.base=C\:\\Code\\Flappy-Bird\\android\\build\\intermediates\\merged_assets\\debug\\mergeDebugAssets\\out
+4.set=ASSET
+3.path=bottomtube.png
+6.base=C\:\\Code\\Flappy-Bird\\android\\build\\intermediates\\merged_assets\\debug\\mergeDebugAssets\\out
+3.baseType=DIRECTORY
+1.set=ASSET
+4.path=ground.png
+6.set=ASSET
+1.baseType=DIRECTORY
+6.baseType=DIRECTORY
+5.path=playButton.png
+0.base=C\:\\Code\\Flappy-Bird\\android\\build\\intermediates\\merged_assets\\debug\\mergeDebugAssets\\out
+0.baseType=DIRECTORY
+3.set=ASSET
+6.path=bird.png
+1.base=C\:\\Code\\Flappy-Bird\\android\\build\\intermediates\\merged_assets\\debug\\mergeDebugAssets\\out
+4.baseType=DIRECTORY
+0.set=ASSET
