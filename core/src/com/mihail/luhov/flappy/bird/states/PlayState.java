@@ -52,7 +52,7 @@ public class PlayState extends State {
         camera.position.x = bird.getPosition().x + 80;
 
         if (bird.getPosition().y <= ground.getHeight() + GROUND_OFFSET)
-            gsm.set(new PlayState(gsm));
+            gsm.set(new EndState(gsm));
         for (Tube tube : tubes)
         {
             if (tube.getPosTopTube().x + tube.getTopTube().getWidth() <
@@ -64,7 +64,7 @@ public class PlayState extends State {
 
             if (tube.collide(bird.getBounds()))
             {
-                gsm.set(new PlayState(gsm));
+                gsm.set(new EndState(gsm));
                 break;
             }
         }
