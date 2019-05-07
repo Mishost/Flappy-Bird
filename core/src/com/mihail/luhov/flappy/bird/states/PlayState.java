@@ -55,6 +55,10 @@ public class PlayState extends State {
             gsm.set(new EndState(gsm));
         for (Tube tube : tubes)
         {
+            int birdLength = Math.round(bird.getPosition().x + bird.getBounds().getWidth());
+            if (birdLength == tube.getPosTopTube().x || birdLength == tube.getPosTopTube().x - 1){
+                bird.playSound();
+            }
             if (tube.getPosTopTube().x + tube.getTopTube().getWidth() <
                     camera.position.x - (camera.viewportWidth / 2))
             {
