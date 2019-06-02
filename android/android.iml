@@ -123,16 +123,5 @@
     <orderEntry type="library" name="Gradle: com.badlogicgames.gdx:gdx-box2d:1.9.9@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.badlogicgames.gdx:gdx-backend-android:1.9.9@jar" level="project" />
     <orderEntry type="module" module-name="core" />
-    <orderEntry type="module" module-name="core" />
-    <orderEntry type="module" module-name="core" />
-    <orderEntry type="module" module-name="core" />
-    <orderEntry type="module" module-name="core" />
-    <orderEntry type="module" module-name="core" />
-    <orderEntry type="module" module-name="core" />
-    <orderEntry type="module" module-name="core" />
-    <orderEntry type="module" module-name="core" />
-    <orderEntry type="module" module-name="core" />
-    <orderEntry type="module" module-name="core" />
-    <orderEntry type="module" module-name="core" />
   </component>
 </module>

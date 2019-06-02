@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.Array;
 import com.mihail.luhov.flappy.bird.FlappyBird;
 import com.mihail.luhov.flappy.bird.sprites.Bird;
 import com.mihail.luhov.flappy.bird.sprites.Tube;
+import com.mihail.luhov.flappy.bird.ui.Score;
 
 public class PlayState extends State {
     private static final int TUBE_SPACING = 125;
@@ -21,7 +22,7 @@ public class PlayState extends State {
     private Array<Tube> tubes;
     private Texture ground;
     private Vector2 groundPos1, groundPos2;
-
+    Score score;
     public PlayState(GameStateManager gsm) {
         super(gsm);
         bird = new Bird(50, 300);
@@ -30,11 +31,13 @@ public class PlayState extends State {
         groundPos1 = new Vector2(camera.position.x  - camera.viewportWidth / 2, GROUND_OFFSET);
         groundPos2 = new Vector2(groundPos1.x + ground.getWidth(), GROUND_OFFSET);
         tubes = new Array<Tube>();
+        score = new Score();
         for (int i = 0; i < TUBE_COUNT; ++i)
             tubes.add(new Tube(i * (TUBE_SPACING + Tube.TUBE_WIDTH)));
 
         camera.setToOrtho(false, FlappyBird.WIDTH / 2,
                 FlappyBird.HEIGHT / 2);
+        tubes.get(0).passed();
     }
 
     @Override
@@ -51,13 +54,14 @@ public class PlayState extends State {
 
         camera.position.x = bird.getPosition().x + 80;
 
-        if (bird.getPosition().y <= ground.getHeight() + GROUND_OFFSET)
+        if (bird.getPosition().y <= ground.getHeight() + GROUND_OFFSET) //it died
             gsm.set(new EndState(gsm));
         for (Tube tube : tubes)
         {
-            int birdLength = Math.round(bird.getPosition().x + bird.getBounds().getWidth());
-            if (birdLength == tube.getPosTopTube().x || birdLength == tube.getPosTopTube().x - 1){
+            if (bird.getPosition().x > tube.getPosTopTube().x && !tube.wasPassed()){
+                tube.passed();
                 bird.playSound();
+                score.increase();
             }
             if (tube.getPosTopTube().x + tube.getTopTube().getWidth() <
                     camera.position.x - (camera.viewportWidth / 2))
@@ -91,6 +95,8 @@ public class PlayState extends State {
         }
         spriteBatch.draw(ground, groundPos1.x, groundPos1.y);
         spriteBatch.draw(ground, groundPos2.x, groundPos2.y);
+
+        score.render(spriteBatch, camera);
         spriteBatch.end();
     }
 

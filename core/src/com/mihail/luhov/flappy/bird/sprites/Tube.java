@@ -15,6 +15,7 @@ public class Tube {
     private Texture topTube, bottomTube;
     private Vector2 posTopTube, posBottomTube;
     private Random rand;
+    private boolean wasPassed;
 
     private Rectangle boundsTop, boundsBottom;
     public Tube(float x)
@@ -36,10 +37,12 @@ public class Tube {
         boundsTop = new Rectangle(posTopTube.x, posTopTube.y, topTube.getWidth(), topTube.getHeight());
         boundsBottom = new Rectangle(posBottomTube.x, posBottomTube.y,
                 bottomTube.getWidth(), bottomTube.getHeight());
+        wasPassed = false;
     }
 
     public void reposition(float x)
     {
+        wasPassed = false;
         posBottomTube.set(x, LOWEST_OPENING +
                 rand.nextInt(FLUCTUATION) - bottomTube.getHeight());
         posTopTube.set(x, posBottomTube.y + TUBE_GAP + topTube.getHeight());
@@ -47,6 +50,17 @@ public class Tube {
         boundsTop.setPosition(posTopTube);
         boundsBottom.setPosition(posBottomTube);
     }
+
+    public void passed()
+    {
+        wasPassed = true;
+    }
+
+    public boolean wasPassed()
+    {
+        return wasPassed;
+    }
+
 
     public boolean collide(Rectangle player)
     {

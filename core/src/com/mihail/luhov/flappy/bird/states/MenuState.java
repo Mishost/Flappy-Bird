@@ -8,6 +8,8 @@ import com.mihail.luhov.flappy.bird.FlappyBird;
 public class MenuState extends State {
     private Texture background;
     private Texture playButton;
+    private float playButtonX;
+    private float playButtonY;
     public MenuState(GameStateManager gsm)
     {
         super(gsm);
@@ -15,12 +17,20 @@ public class MenuState extends State {
                 FlappyBird.HEIGHT / 2);
         background = new Texture("background.png");
         playButton = new Texture("playButton.png");
+        playButtonX = camera.position.x - camera.viewportWidth / 2;
+        playButtonY = camera.position.y;
     }
     @Override
     public void handleInput() {
         if (Gdx.input.justTouched())
         {
-            gsm.set(new PlayState(gsm));
+           // if (Gdx.input.getY() <= playButton.getHeight() + playButtonY &&
+           //         Gdx.input.getX() <= playButton.getWidth() + playButtonX &&
+           // Gdx.input.getY() >= playButtonY && Gdx.input.getX() >= playButtonX)
+            {
+                gsm.set(new PlayState(gsm));
+            }
+
         }
     }
 
