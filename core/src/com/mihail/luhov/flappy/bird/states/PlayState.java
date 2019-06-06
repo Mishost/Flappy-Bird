@@ -11,6 +11,7 @@ import com.mihail.luhov.flappy.bird.FlappyBird;
 import com.mihail.luhov.flappy.bird.sprites.Bird;
 import com.mihail.luhov.flappy.bird.sprites.Tube;
 import com.mihail.luhov.flappy.bird.ui.Score;
+import com.mihail.luhov.flappy.bird.FlappyBird;
 
 public class PlayState extends State {
     private static final int TUBE_SPACING = 125;
@@ -52,10 +53,14 @@ public class PlayState extends State {
         updateGround();
         bird.update(dt);
 
-        camera.position.x = bird.getPosition().x + 80;
+        camera.position.x = (bird.getPosition().x + 80);
 
         if (bird.getPosition().y <= ground.getHeight() + GROUND_OFFSET) //it died
+        {
+            FlappyBird.updateHighscore(score.getScore());
             gsm.set(new EndState(gsm));
+        }
+
         for (Tube tube : tubes)
         {
             if (bird.getPosition().x > tube.getPosTopTube().x && !tube.wasPassed()){
@@ -72,6 +77,7 @@ public class PlayState extends State {
 
             if (tube.collide(bird.getBounds()))
             {
+                FlappyBird.updateHighscore(score.getScore());
                 gsm.set(new EndState(gsm));
                 break;
             }
