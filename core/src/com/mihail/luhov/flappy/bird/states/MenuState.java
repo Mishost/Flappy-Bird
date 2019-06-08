@@ -16,12 +16,12 @@ public class MenuState extends State {
     public MenuState(GameStateManager gsm)
     {
         super(gsm);
-        camera.setToOrtho(false, FlappyBird.WIDTH / 2,
+        UIcamera.setToOrtho(false, FlappyBird.WIDTH / 2,
                 FlappyBird.HEIGHT / 2);
         background = new Texture("background.png");
         playButton = new Texture("playButton.png");
-        playButtonX = camera.position.x - camera.viewportWidth / 2;
-        playButtonY = camera.position.y;
+        playButtonX = UIcamera.position.x - UIcamera.viewportWidth / 2;
+        playButtonY = UIcamera.position.y;
         font = new BitmapFont(Gdx.files.internal("flappyFont.fnt"));
         font.getData().setScale(0.5f);
         //font.getColor().set(Color.BLACK);
@@ -47,11 +47,11 @@ public class MenuState extends State {
 
     @Override
     public void render(SpriteBatch spriteBatch) {
-        spriteBatch.setProjectionMatrix(camera.combined);
+        spriteBatch.setProjectionMatrix(UIcamera.combined);
         spriteBatch.begin();
         spriteBatch.draw(background, 0, 0);
-        spriteBatch.draw(playButton, camera.position.x - playButton.getWidth() / 2,
-                camera.position.y);
+        spriteBatch.draw(playButton, UIcamera.position.x - playButton.getWidth() / 2,
+                UIcamera.position.y);
         font.draw(spriteBatch, "Highscore: " + Integer.toString(FlappyBird.highscore),
                 FlappyBird.WIDTH / 10 - 15,
                 FlappyBird.HEIGHT / 10 + 20);

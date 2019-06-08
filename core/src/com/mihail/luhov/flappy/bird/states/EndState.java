@@ -13,7 +13,7 @@ public class EndState extends State {
     public EndState(GameStateManager gsm)
     {
         super(gsm);
-        camera.setToOrtho(false, FlappyBird.WIDTH / 2,
+        UIcamera.setToOrtho(false, FlappyBird.WIDTH / 2,
                 FlappyBird.HEIGHT / 2);
         font = new BitmapFont(Gdx.files.internal("flappyFont.fnt"));
         font.getData().setScale(0.85f);
@@ -33,7 +33,7 @@ public class EndState extends State {
 
     @Override
     public void render(SpriteBatch spriteBatch) {
-        spriteBatch.setProjectionMatrix(camera.combined);
+        spriteBatch.setProjectionMatrix(UIcamera.combined);
         spriteBatch.begin();
         spriteBatch.draw(background, 0, 0);
         font.getData().setScale(0.85f);

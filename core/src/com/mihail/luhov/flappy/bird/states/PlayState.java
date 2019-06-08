@@ -38,6 +38,8 @@ public class PlayState extends State {
 
         camera.setToOrtho(false, FlappyBird.WIDTH / 2,
                 FlappyBird.HEIGHT / 2);
+        UIcamera.setToOrtho(false, FlappyBird.WIDTH / 2,
+                FlappyBird.HEIGHT / 2);
         tubes.get(0).passed();
     }
 
@@ -84,6 +86,7 @@ public class PlayState extends State {
         }
 
         camera.update();
+        UIcamera.update();
     }
 
     @Override
@@ -101,8 +104,10 @@ public class PlayState extends State {
         }
         spriteBatch.draw(ground, groundPos1.x, groundPos1.y);
         spriteBatch.draw(ground, groundPos2.x, groundPos2.y);
-
-        score.render(spriteBatch, camera);
+        spriteBatch.end();
+        spriteBatch.setProjectionMatrix(UIcamera.combined);
+        spriteBatch.begin();
+        score.render(spriteBatch, UIcamera);
         spriteBatch.end();
     }
 
