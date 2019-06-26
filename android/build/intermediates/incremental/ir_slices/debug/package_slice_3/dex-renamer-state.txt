@@ -1,4 +1,4 @@
-#Mon May 06 00:18:15 EEST 2019
+#Sun Jun 09 12:41:45 EEST 2019
 base.0=C\:\\Code\\Flappy-Bird\\android\\build\\intermediates\\transforms\\dexMerger\\debug\\3
 path.0=classes.dex
 renamed.0=classes.dex
