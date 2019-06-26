@@ -24,19 +24,14 @@ public class MenuState extends State {
         playButtonY = UIcamera.position.y;
         font = new BitmapFont(Gdx.files.internal("flappyFont.fnt"));
         font.getData().setScale(0.5f);
-        //font.getColor().set(Color.BLACK);
     }
     @Override
     public void handleInput() {
         if (Gdx.input.justTouched())
         {
-           // if (Gdx.input.getY() <= playButton.getHeight() + playButtonY &&
-           //         Gdx.input.getX() <= playButton.getWidth() + playButtonX &&
-           // Gdx.input.getY() >= playButtonY && Gdx.input.getX() >= playButtonX)
             {
                 gsm.set(new PlayState(gsm));
             }
-
         }
     }
 
